@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -13,6 +14,17 @@
   <link rel="stylesheet" href="../css/style.css">
 
   <style>
+    /* CONTACTページだけのレイアウト調整 */
+    .side-left .side-copy,
+    .side-left .side-small,
+    .side-right {
+      display: none !important;
+    }
+
+    .layout {
+      grid-template-columns: minmax(170px, 1fr) minmax(420px, 680px);
+    }
+
     .contact-form {
       width: 100%;
       max-width: 620px;
@@ -171,6 +183,12 @@
       overflow: hidden !important;
     }
 
+    @media (max-width: 850px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
     @media (max-width: 600px) {
       .contact-form {
         margin-top: 24px;
@@ -186,9 +204,7 @@
 <body>
 
   <header class="topbar">
-    <a class="topbar-brand" href="../">
-      kaworia
-    </a>
+    <a class="topbar-brand" href="../">kaworia</a>
 
     <nav class="top-nav" aria-label="メインナビゲーション">
       <a href="../">
@@ -260,6 +276,7 @@
               <option value="情報提供・要望">情報提供・要望</option>
               <option value="データ内容の不備">データ内容の不備</option>
               <option value="サイトの不具合">サイトの不具合</option>
+              <option value="その他">その他</option>
               <option value="その他：要返信">その他：要返信</option>
             </select>
           </div>
@@ -281,6 +298,20 @@
           </div>
 
           <div class="form-group">
+            <label class="form-label" for="reply-method">
+              返信先の種類
+              <span id="method-requirement" class="form-optional">任意</span>
+            </label>
+
+            <select id="reply-method" name="replyMethod">
+              <option value="">選択してください</option>
+              <option value="メール">メール</option>
+              <option value="Discord">Discord</option>
+              <option value="X">X</option>
+            </select>
+          </div>
+
+          <div class="form-group">
             <label class="form-label" for="reply">
               返信先
               <span id="reply-requirement" class="form-optional">任意</span>
@@ -291,12 +322,12 @@
               id="reply"
               name="reply"
               maxlength="254"
-              autocomplete="email"
-              placeholder="メールアドレスなど（任意）"
+              placeholder="返信先の種類を選択してください"
+              autocomplete="off"
             >
 
-            <p class="form-help">
-              「その他：要返信」を選択した場合は入力が必要です。
+            <p id="reply-help" class="form-help">
+              返信が必要な場合は、連絡先やアカウント名をご記入ください。
             </p>
           </div>
 
@@ -315,7 +346,6 @@
             ></textarea>
           </div>
 
-          <!-- 迷惑投稿対策用の隠し項目 -->
           <div class="honeypot" aria-hidden="true">
             <label for="website">この項目は入力しないでください</label>
             <input
@@ -356,11 +386,9 @@
 
     <aside class="side-right">
       <p class="toc-title">CONTENTS</p>
-
       <nav class="toc">
         <a href="../"><span>00</span> HOME</a>
       </nav>
-
       <span class="side-small right-note">KAWORIA</span>
     </aside>
 
@@ -378,28 +406,57 @@
     const form = document.getElementById("contact-form");
     const category = document.getElementById("category");
     const nameInput = document.getElementById("name");
+    const methodInput = document.getElementById("reply-method");
     const replyInput = document.getElementById("reply");
     const submitButton = document.getElementById("submit-button");
     const statusBox = document.getElementById("form-status");
+
     const nameRequirement = document.getElementById("name-requirement");
+    const methodRequirement = document.getElementById("method-requirement");
     const replyRequirement = document.getElementById("reply-requirement");
+    const replyHelp = document.getElementById("reply-help");
+
+    function setRequirement(element, required) {
+      element.textContent = required ? "必須" : "任意";
+      element.className = required ? "form-required" : "form-optional";
+    }
 
     function updateRequiredFields() {
       const needsReply = category.value === "その他：要返信";
 
       nameInput.required = needsReply;
+      methodInput.required = needsReply;
       replyInput.required = needsReply;
 
-      nameRequirement.textContent = needsReply ? "必須" : "任意";
-      replyRequirement.textContent = needsReply ? "必須" : "任意";
+      setRequirement(nameRequirement, needsReply);
+      setRequirement(methodRequirement, needsReply);
+      setRequirement(replyRequirement, needsReply);
 
-      nameRequirement.className = needsReply
-        ? "form-required"
-        : "form-optional";
+      updateReplyPlaceholder();
+    }
 
-      replyRequirement.className = needsReply
-        ? "form-required"
-        : "form-optional";
+    function updateReplyPlaceholder() {
+      const method = methodInput.value;
+
+      const placeholders = {
+        "※一時的に「kawaiiOTP」よりフレンド申請・フォローなどの対応をする可能性があります。対応後に解除される可能性があることを予めご了承ください。",
+        "Discord": "Discordの「ユーザー名」をご記入ください。※表示名ではありませんので注意してください。",
+        "X": "Xのユーザー名またはプロフィールURLを入力してください。"
+      };
+
+      replyInput.placeholder = placeholders[method] ||
+        "返信先の種類を選択してください";
+
+      if (method === "Discord") {
+        replyInput.type = "text";
+        replyHelp.textContent = "Discordの「ユーザー名」をご記入ください。※表示名ではありませんので注意してください。";
+      } else if (method === "X") {
+        replyInput.type = "text";
+        replyHelp.textContent = "Xのユーザー名またはプロフィールURLをご記入ください。";
+      } else {
+        replyInput.type = "text";
+        replyHelp.textContent = "返信が必要な場合は、連絡先やアカウント名をご記入ください。";
+      }
     }
 
     function showStatus(message, type) {
@@ -408,11 +465,18 @@
     }
 
     category.addEventListener("change", updateRequiredFields);
+    methodInput.addEventListener("change", updateReplyPlaceholder);
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!form.reportValidity()) {
+        return;
+      }
+
+      if (replyInput.value.trim() && !methodInput.value) {
+        showStatus("返信先の種類を選択してください。", "error");
+        methodInput.focus();
         return;
       }
 
@@ -425,6 +489,7 @@
       const data = {
         category: formData.get("category"),
         name: formData.get("name"),
+        replyMethod: formData.get("replyMethod"),
         reply: formData.get("reply"),
         message: formData.get("message"),
         website: formData.get("website")
@@ -451,6 +516,7 @@
 
         form.reset();
         updateRequiredFields();
+        updateReplyPlaceholder();
 
         showStatus(
           "お問い合わせを送信しました。ありがとうございます！",
@@ -470,6 +536,7 @@
     });
 
     updateRequiredFields();
+    updateReplyPlaceholder();
   </script>
 
 </body>
