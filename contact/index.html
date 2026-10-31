@@ -19,13 +19,11 @@
        CONTACTページ専用レイアウト
     ========================= */
 
-    /* 左側はロゴだけ残す */
     .side-left .side-copy,
     .side-left .side-small {
       display: none !important;
     }
 
-    /* 3カラムを維持 */
     .layout {
       grid-template-columns:
         var(--side-width)
@@ -33,7 +31,6 @@
         var(--toc-width);
     }
 
-    /* 右側はCONTACTSだけ表示 */
     .side-right {
       display: flex !important;
       padding-top: 15vh;
@@ -131,6 +128,10 @@
       white-space: pre-line;
     }
 
+    .form-help.is-error {
+      color: #b65e79;
+    }
+
     .form-submit {
       display: block;
       width: 100%;
@@ -207,7 +208,6 @@
       overflow: hidden !important;
     }
 
-    /* CONTACTページ内フッターをHOMEと統一 */
     .content-footer {
       display: flex;
       justify-content: center;
@@ -217,7 +217,6 @@
       background: #faf9fc;
     }
 
-    /* スマートフォン */
     @media (max-width: 850px) {
       .layout {
         display: flex;
@@ -465,9 +464,34 @@
     const replyRequirement = document.getElementById("reply-requirement");
     const replyHelp = document.getElementById("reply-help");
 
+    // 日本語文字・全角文字の検出
+    const japanesePattern =
+      /[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\uFF01-\uFF60\uFF66-\uFF9D\uFFE0-\uFFE6\u3400-\u4DBF\u4E00-\u9FFF\u{20000}-\u{2FA1F}]/u;
+
+    const japaneseErrorMessage =
+      "返信先には日本語や全角文字を使用できません。半角英数字・記号で入力してください。";
+
     function setRequirement(element, required) {
       element.textContent = required ? "必須" : "任意";
       element.className = required ? "form-required" : "form-optional";
+    }
+
+    function validateReply() {
+      const hasJapanese = japanesePattern.test(replyInput.value);
+
+      replyInput.setCustomValidity(
+        hasJapanese ? japaneseErrorMessage : ""
+      );
+
+      replyHelp.classList.toggle("is-error", hasJapanese);
+
+      if (hasJapanese) {
+        replyHelp.textContent = japaneseErrorMessage;
+      } else {
+        updateReplyHelpText();
+      }
+
+      return !hasJapanese;
     }
 
     function updateRequiredFields() {
@@ -484,18 +508,10 @@
       updateReplyPlaceholder();
     }
 
-    function updateReplyPlaceholder() {
+    function updateReplyHelpText() {
       const method = methodInput.value;
 
-      const placeholders = {
-        "Discord": "Discordのユーザー名を入力してください",
-        "X": "Xのユーザー名またはプロフィールURLを入力してください"
-      };
-
-      replyInput.type = "text";
-
-      replyInput.placeholder = placeholders[method] ||
-        "返信先の種類を選択してください";
+      replyHelp.classList.remove("is-error");
 
       if (method === "Discord") {
         replyHelp.textContent =
@@ -513,16 +529,38 @@
       }
     }
 
+    function updateReplyPlaceholder() {
+      const method = methodInput.value;
+
+      const placeholders = {
+        "Discord": "Discordのユーザー名を入力してください",
+        "X": "Xのユーザー名またはプロフィールURLを入力してください"
+      };
+
+      replyInput.type = "text";
+
+      replyInput.placeholder = placeholders[method] ||
+        "返信先の種類を選択してください";
+
+      updateReplyHelpText();
+      validateReply();
+    }
+
     function showStatus(message, type) {
       statusBox.textContent = message;
       statusBox.className = "form-status is-visible is-" + type;
     }
+
+    // 返信先の入力時に日本語をチェック
+    replyInput.addEventListener("input", validateReply);
 
     category.addEventListener("change", updateRequiredFields);
     methodInput.addEventListener("change", updateReplyPlaceholder);
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      validateReply();
 
       if (!form.reportValidity()) {
         return;
