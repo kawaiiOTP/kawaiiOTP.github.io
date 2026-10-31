@@ -1,30 +1,196 @@
-
 <!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>CONTACT | kawaiiOTP</title>
+  <title>CONTACT | kaworia</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
 
   <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    .contact-form {
+      width: 100%;
+      max-width: 620px;
+      margin-top: 30px;
+    }
+
+    .form-intro {
+      margin-bottom: 28px;
+      color: #777184;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 9px;
+      color: #625773;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .form-required,
+    .form-optional {
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .form-required {
+      color: #a36f91;
+      background: #f9e0e8;
+    }
+
+    .form-optional {
+      color: #7c8ca1;
+      background: #e5f1fa;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid #e4dce9;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      color: #51485e;
+      font: inherit;
+      font-size: 13px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: #c5addb;
+      box-shadow: 0 0 0 3px rgba(197, 173, 219, .18);
+    }
+
+    .contact-form textarea {
+      min-height: 190px;
+      resize: vertical;
+      line-height: 1.8;
+    }
+
+    .form-help {
+      margin: 7px 0 0;
+      color: #96909e;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .form-submit {
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 30px;
+      background: linear-gradient(110deg, #e7d8f1, #dceefa, #f8e1eb);
+      color: #665878;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: opacity .2s, transform .2s;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      opacity: .85;
+    }
+
+    .form-submit:disabled {
+      cursor: wait;
+      opacity: .55;
+      transform: none;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 20px;
+      padding: 15px 17px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .form-status.is-visible {
+      display: block;
+    }
+
+    .form-status.is-success {
+      background: #edf7f2;
+      color: #557d68;
+    }
+
+    .form-status.is-error {
+      background: #fbebef;
+      color: #a45e75;
+    }
+
+    .form-status.is-loading {
+      background: #f1edf8;
+      color: #75658c;
+    }
+
+    .form-back {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 32px;
+      color: #8e79a8;
+      font-size: 12px;
+      text-decoration: underline;
+      text-decoration-color: #c9b9d8;
+      text-underline-offset: 4px;
+    }
+
+    .honeypot {
+      position: absolute !important;
+      left: -10000px !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+    }
+
+    @media (max-width: 600px) {
+      .contact-form {
+        margin-top: 24px;
+      }
+
+      .contact-form textarea {
+        min-height: 160px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- 上部固定ヘッダー -->
   <header class="topbar">
-
     <a class="topbar-brand" href="../">
-      kawaiiOTP
+      kaworia
     </a>
 
     <nav class="top-nav" aria-label="メインナビゲーション">
-
       <a href="../">
         <span class="material-symbols-rounded" aria-hidden="true">home</span>
         <span>HOME</span>
@@ -34,20 +200,16 @@
         <span class="material-symbols-rounded" aria-hidden="true">mail</span>
         <span>CONTACT</span>
       </a>
-
     </nav>
   </header>
 
-
   <main class="layout">
 
-    <!-- 左側ロゴ -->
     <aside class="side-left">
-
       <a class="logo-link" href="../">
         <img
           src="../assets/images/logo.png"
-          alt="kawaiiOTP ロゴ"
+          alt="kaworia ロゴ"
           class="site-logo"
         >
       </a>
@@ -57,88 +219,258 @@
         お問い合わせください。
       </p>
 
-      <span class="side-small">
-        CONTACT
-      </span>
-
+      <span class="side-small">CONTACT</span>
     </aside>
 
-
-    <!-- 中央コンテンツ -->
     <div class="content-frame">
 
       <section class="hero section">
-
         <p class="eyebrow">GET IN TOUCH</p>
-
         <h1>CONTACT</h1>
-
-        <p class="hero-lead">
-          お問い合わせ
-        </p>
-
+        <p class="hero-lead">お問い合わせ</p>
       </section>
-
 
       <section class="section contact">
 
         <div class="section-heading">
-
           <span class="section-number">✉</span>
 
           <div>
             <p class="eyebrow">MESSAGE</p>
             <h2>お問い合わせフォーム</h2>
           </div>
-
         </div>
 
-        <p class="section-text">
-          フォームは現在準備中です。
-          公開時に、情報提供・要望、不備の報告、
-          サイトの不具合などを送れるようにする予定です。
+        <p class="form-intro">
+          情報提供・ご要望、掲載データの不備、サイトの不具合など、
+          こちらのフォームからお知らせください。<br>
+          内容を確認のうえ、必要に応じて対応いたします。
         </p>
 
-        <a class="contact-link" href="../">
+        <form id="contact-form" class="contact-form">
+
+          <div class="form-group">
+            <label class="form-label" for="category">
+              お問い合わせ種類
+              <span class="form-required">必須</span>
+            </label>
+
+            <select id="category" name="category" required>
+              <option value="">選択してください</option>
+              <option value="情報提供・要望">情報提供・要望</option>
+              <option value="データ内容の不備">データ内容の不備</option>
+              <option value="サイトの不具合">サイトの不具合</option>
+              <option value="その他：要返信">その他：要返信</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="name">
+              お名前
+              <span id="name-requirement" class="form-optional">任意</span>
+            </label>
+
+            <input
+              type="text"
+              id="name"
+              name="name"
+              maxlength="80"
+              autocomplete="name"
+              placeholder="お名前（任意）"
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reply">
+              返信先
+              <span id="reply-requirement" class="form-optional">任意</span>
+            </label>
+
+            <input
+              type="text"
+              id="reply"
+              name="reply"
+              maxlength="254"
+              autocomplete="email"
+              placeholder="メールアドレスなど（任意）"
+            >
+
+            <p class="form-help">
+              「その他：要返信」を選択した場合は入力が必要です。
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">
+              お問い合わせ内容
+              <span class="form-required">必須</span>
+            </label>
+
+            <textarea
+              id="message"
+              name="message"
+              maxlength="1800"
+              required
+              placeholder="お問い合わせ内容をご記入ください。"
+            ></textarea>
+          </div>
+
+          <!-- 迷惑投稿対策用の隠し項目 -->
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">この項目は入力しないでください</label>
+            <input
+              type="text"
+              id="website"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            >
+          </div>
+
+          <button type="submit" id="submit-button" class="form-submit">
+            SEND MESSAGE
+          </button>
+
+          <div
+            id="form-status"
+            class="form-status"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+        </form>
+
+        <a class="form-back" href="../">
           <span>トップページへ戻る</span>
           <span aria-hidden="true">↗</span>
         </a>
 
       </section>
 
-
       <footer class="content-footer">
         <span>THANK YOU FOR VISITING!</span>
-        <span>© kawaiiOTP</span>
+        <span>© kaworia</span>
       </footer>
 
     </div>
 
-
-    <!-- 右側目次 -->
     <aside class="side-right">
-
       <p class="toc-title">CONTENTS</p>
 
       <nav class="toc">
         <a href="../"><span>00</span> HOME</a>
       </nav>
 
-      <span class="side-small right-note">
-        KAWAIIOTP
-      </span>
-
+      <span class="side-small right-note">KAWORIA</span>
     </aside>
 
   </main>
 
-
-  <!-- 下部固定フッター -->
   <footer class="bottombar">
-    <span>kawaiiOTP</span>
+    <span>kaworia</span>
     <span class="bottom-message">A LITTLE PLACE FOR FAVORITES</span>
     <span>© 2026</span>
   </footer>
+
+  <script>
+    const WORKER_URL = "https://contacts.kaworia.workers.dev";
+
+    const form = document.getElementById("contact-form");
+    const category = document.getElementById("category");
+    const nameInput = document.getElementById("name");
+    const replyInput = document.getElementById("reply");
+    const submitButton = document.getElementById("submit-button");
+    const statusBox = document.getElementById("form-status");
+    const nameRequirement = document.getElementById("name-requirement");
+    const replyRequirement = document.getElementById("reply-requirement");
+
+    function updateRequiredFields() {
+      const needsReply = category.value === "その他：要返信";
+
+      nameInput.required = needsReply;
+      replyInput.required = needsReply;
+
+      nameRequirement.textContent = needsReply ? "必須" : "任意";
+      replyRequirement.textContent = needsReply ? "必須" : "任意";
+
+      nameRequirement.className = needsReply
+        ? "form-required"
+        : "form-optional";
+
+      replyRequirement.className = needsReply
+        ? "form-required"
+        : "form-optional";
+    }
+
+    function showStatus(message, type) {
+      statusBox.textContent = message;
+      statusBox.className = "form-status is-visible is-" + type;
+    }
+
+    category.addEventListener("change", updateRequiredFields);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "SENDING...";
+      showStatus("送信しています。しばらくお待ちください。", "loading");
+
+      const formData = new FormData(form);
+
+      const data = {
+        category: formData.get("category"),
+        name: formData.get("name"),
+        reply: formData.get("reply"),
+        message: formData.get("message"),
+        website: formData.get("website")
+      };
+
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          throw new Error("送信に失敗しました。");
+        }
+
+        const result = await response.json();
+
+        if (!result.success) {
+          throw new Error("送信に失敗しました。");
+        }
+
+        form.reset();
+        updateRequiredFields();
+
+        showStatus(
+          "お問い合わせを送信しました。ありがとうございます！",
+          "success"
+        );
+
+      } catch (error) {
+        showStatus(
+          "送信できませんでした。時間をおいて再度お試しください。",
+          "error"
+        );
+
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "SEND MESSAGE";
+      }
+    });
+
+    updateRequiredFields();
+  </script>
 
 </body>
 </html>
