@@ -685,3 +685,44 @@ a {
   }
 
 }
+
+/* =========================
+   ABOUT：箇条書き
+========================= */
+
+.about-list {
+  margin: 8px 0 0;
+  padding-left: 1.5em;
+
+  line-height: 2.1;
+}
+
+.about-list li {
+  padding-left: 3px;
+}
+
+
+/* =========================
+   Xプロフィールリンク
+========================= */
+
+.profile-link {
+  display: block;
+  width: fit-content;
+
+  margin: 14px 20px 0 auto;
+
+  color: #8e79a8;
+  text-decoration: underline;
+  text-decoration-color: #c9b9d8;
+  text-underline-offset: 4px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition: color .2s;
+}
+
+.profile-link:hover {
+  color: #b18fc9;
+}
