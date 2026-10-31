@@ -10,7 +10,7 @@
   --line: #eeeaf2;
 
   --topbar-h: 66px;
-  --bottombar-h: 76px;
+  --bottombar-h: 92px;
 
   --side-width: minmax(170px, 1fr);
   --content-width: minmax(420px, 680px);
@@ -122,7 +122,7 @@ a {
   justify-content: center;
   text-align: center;
 
-  padding: 8px 20px;
+  padding: 16px 20px;
 
   border-top: 1px solid #f0edf3;
 }
@@ -134,7 +134,7 @@ a {
   font-size: 10px;
   font-weight: 500;
   letter-spacing: .02em;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 .bottombar strong {
@@ -318,18 +318,25 @@ a {
   letter-spacing: .2em;
 }
 
-.hero h1 {
+/* HERO内ロゴ */
+
+.hero-title {
   margin: 0;
-
-  color: #6c6682;
-
-  font-size: clamp(27px, 4vw, 43px);
-  line-height: 1.55;
-  letter-spacing: .04em;
+  padding: 0;
+  line-height: 0;
 }
 
-.hero h1 span {
-  color: #9a80b4;
+.hero-logo {
+  display: block;
+
+  width: min(100%, 340px);
+  max-height: 150px;
+
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+
+  margin: 0 0 4px;
 }
 
 .hero-lead {
@@ -528,18 +535,24 @@ a {
 ========================= */
 
 .content-footer {
-  padding: 35px 0 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 35px 20px 30px;
   text-align: center;
 
   background: #faf9fc;
 }
 
 .footer-sparkle {
-  display: inline-block;
+  display: block;
+  width: 100%;
 
   color: #b9a9df;
-  font-size: 20px;
-  letter-spacing: 5px;
+  font-size: 18px;
+  letter-spacing: 7px;
+  text-align: center;
 }
 
 
@@ -550,7 +563,7 @@ a {
 @media (max-width: 850px) {
 
   :root {
-    --bottombar-h: 76px;
+    --bottombar-h: 92px;
   }
 
   body {
@@ -564,12 +577,12 @@ a {
 
   .bottombar {
     min-height: var(--bottombar-h);
-    padding: 7px 12px;
+    padding: 12px 12px;
   }
 
   .bottombar small {
     font-size: 8px;
-    line-height: 1.5;
+    line-height: 1.7;
   }
 
   .layout {
@@ -622,6 +635,11 @@ a {
   .hero {
     min-height: 370px;
   }
+
+  .hero-logo {
+    width: min(100%, 300px);
+    max-height: 130px;
+  }
 }
 
 
@@ -652,8 +670,18 @@ a {
     min-height: 340px;
   }
 
+  .hero-logo {
+    width: min(100%, 260px);
+    max-height: 110px;
+  }
+
   .content-footer {
-    padding: 30px 0 24px;
+    padding: 30px 15px 24px;
+  }
+
+  .footer-sparkle {
+    font-size: 15px;
+    letter-spacing: 4px;
   }
 
 }
