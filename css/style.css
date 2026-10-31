@@ -10,7 +10,7 @@
   --line: #eeeaf2;
 
   --topbar-h: 66px;
-  --bottombar-h: 42px;
+  --bottombar-h: 54px;
 
   --side-width: minmax(170px, 1fr);
   --content-width: minmax(420px, 680px);
@@ -119,18 +119,20 @@ a {
   bottom: 0;
   height: var(--bottombar-h);
 
-  border-top: 1px solid #f0edf3;
+  justify-content: center;
+  text-align: center;
 
-  color: #a19baa;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: .12em;
+  padding: 0 20px;
+
+  border-top: 1px solid #f0edf3;
 }
 
-.bottom-message {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+.bottombar small {
+  color: #9290a3;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  line-height: 1.5;
 }
 
 
@@ -186,7 +188,7 @@ a {
 
 .logo-link {
   display: block;
-  width: min(100%, 210px);
+  width: min(100%, 260px);
 }
 
 .site-logo {
@@ -194,25 +196,6 @@ a {
   width: 100%;
   height: auto;
   object-fit: contain;
-}
-
-.side-copy {
-  margin: 24px 0 0;
-
-  font-size: 13px;
-  line-height: 2;
-  font-weight: 600;
-
-  color: #777187;
-}
-
-.side-small {
-  margin-top: auto;
-
-  color: #aaa4b3;
-  font-size: 8px;
-  line-height: 1.8;
-  letter-spacing: .16em;
 }
 
 
@@ -562,6 +545,10 @@ a {
 
 @media (max-width: 850px) {
 
+  :root {
+    --bottombar-h: 58px;
+  }
+
   body {
     overflow: auto;
   }
@@ -572,12 +559,13 @@ a {
   }
 
   .bottombar {
-    height: 38px;
-    padding: 0 18px;
+    height: var(--bottombar-h);
+    padding: 5px 12px;
   }
 
-  .bottom-message {
-    display: none;
+  .bottombar small {
+    font-size: 8px;
+    line-height: 1.4;
   }
 
   .layout {
@@ -587,7 +575,7 @@ a {
     flex-direction: column;
     gap: 0;
 
-    padding: 60px 0 38px;
+    padding: 60px 0 var(--bottombar-h);
 
     min-height: 100vh;
   }
