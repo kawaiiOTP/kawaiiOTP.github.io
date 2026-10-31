@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>CONTACT | kaworia</title>
+  <meta name="description" content="kaworiaへのお問い合わせフォームです。">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,15 +15,37 @@
   <link rel="stylesheet" href="../css/style.css">
 
   <style>
-    /* CONTACTページだけのレイアウト調整 */
+    /* =========================
+       CONTACTページ専用レイアウト
+    ========================= */
+
+    /* 左側はロゴだけ残す */
     .side-left .side-copy,
-    .side-left .side-small,
-    .side-right {
+    .side-left .side-small {
       display: none !important;
     }
 
+    /* 3カラムを維持 */
     .layout {
-      grid-template-columns: minmax(170px, 1fr) minmax(420px, 680px);
+      grid-template-columns:
+        var(--side-width)
+        var(--content-width)
+        var(--toc-width);
+    }
+
+    /* 右側はCONTACTSだけ表示 */
+    .side-right {
+      display: flex !important;
+      padding-top: 15vh;
+    }
+
+    .side-right .toc,
+    .side-right .right-note {
+      display: none !important;
+    }
+
+    .side-right .toc-title {
+      margin: 0;
     }
 
     .contact-form {
@@ -104,7 +127,8 @@
       margin: 7px 0 0;
       color: #96909e;
       font-size: 11px;
-      line-height: 1.7;
+      line-height: 1.8;
+      white-space: pre-line;
     }
 
     .form-submit {
@@ -183,9 +207,34 @@
       overflow: hidden !important;
     }
 
+    /* CONTACTページ内フッターをHOMEと統一 */
+    .content-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 35px 20px 30px;
+      text-align: center;
+      background: #faf9fc;
+    }
+
+    /* スマートフォン */
     @media (max-width: 850px) {
       .layout {
-        grid-template-columns: minmax(0, 1fr);
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .side-right {
+        order: -1;
+        display: block !important;
+        padding: 14px 18px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .side-right .toc-title {
+        margin: 0;
       }
     }
 
@@ -221,6 +270,7 @@
 
   <main class="layout">
 
+    <!-- 左側：ロゴ -->
     <aside class="side-left">
       <a class="logo-link" href="../">
         <img
@@ -229,15 +279,9 @@
           class="site-logo"
         >
       </a>
-
-      <p class="side-copy">
-        お気軽に<br>
-        お問い合わせください。
-      </p>
-
-      <span class="side-small">CONTACT</span>
     </aside>
 
+    <!-- 中央：お問い合わせ -->
     <div class="content-frame">
 
       <section class="hero section">
@@ -265,6 +309,7 @@
 
         <form id="contact-form" class="contact-form">
 
+          <!-- お問い合わせ種類 -->
           <div class="form-group">
             <label class="form-label" for="category">
               お問い合わせ種類
@@ -281,6 +326,7 @@
             </select>
           </div>
 
+          <!-- お名前 -->
           <div class="form-group">
             <label class="form-label" for="name">
               お名前
@@ -297,6 +343,7 @@
             >
           </div>
 
+          <!-- 返信先の種類 -->
           <div class="form-group">
             <label class="form-label" for="reply-method">
               返信先の種類
@@ -305,12 +352,12 @@
 
             <select id="reply-method" name="replyMethod">
               <option value="">選択してください</option>
-              <option value="メール">メール</option>
               <option value="Discord">Discord</option>
               <option value="X">X</option>
             </select>
           </div>
 
+          <!-- 返信先 -->
           <div class="form-group">
             <label class="form-label" for="reply">
               返信先
@@ -331,6 +378,7 @@
             </p>
           </div>
 
+          <!-- お問い合わせ内容 -->
           <div class="form-group">
             <label class="form-label" for="message">
               お問い合わせ内容
@@ -346,6 +394,7 @@
             ></textarea>
           </div>
 
+          <!-- スパム対策用：入力しない項目 -->
           <div class="honeypot" aria-hidden="true">
             <label for="website">この項目は入力しないでください</label>
             <input
@@ -377,27 +426,27 @@
 
       </section>
 
+      <!-- HOMEと同じ中央フッター -->
       <footer class="content-footer">
-        <span>THANK YOU FOR VISITING!</span>
-        <span>© kaworia</span>
+        <span class="footer-sparkle">✧　✦　✧　✦　✧　✦　✧　✦　✧</span>
       </footer>
 
     </div>
 
+    <!-- 右側：CONTACTSのみ -->
     <aside class="side-right">
-      <p class="toc-title">CONTENTS</p>
-      <nav class="toc">
-        <a href="../"><span>00</span> HOME</a>
-      </nav>
-      <span class="side-small right-note">KAWORIA</span>
+      <p class="toc-title">CONTACTS</p>
     </aside>
 
   </main>
 
+  <!-- HOMEと同じ固定フッター -->
   <footer class="bottombar">
-    <span>kaworia</span>
-    <span class="bottom-message">A LITTLE PLACE FOR FAVORITES</span>
-    <span>© 2026</span>
+    <small>
+      kawaiiOTPが制作・管理しているEternal Returnの有志サイトです。<br>
+      引用内容/スクリーンショット/画像の権利につきましては、権利者様へ帰属します。<br>
+      ©2020 NIMBLE NEURON CORPORATION. ALL RIGHTS RESERVED.
+    </small>
   </footer>
 
   <script>
@@ -439,23 +488,28 @@
       const method = methodInput.value;
 
       const placeholders = {
-        "※一時的に「kawaiiOTP」よりフレンド申請・フォローなどの対応をする可能性があります。対応後に解除される可能性があることを予めご了承ください。",
-        "Discord": "Discordの「ユーザー名」をご記入ください。※表示名ではありませんので注意してください。",
-        "X": "Xのユーザー名またはプロフィールURLを入力してください。"
+        "Discord": "Discordのユーザー名を入力してください",
+        "X": "Xのユーザー名またはプロフィールURLを入力してください"
       };
+
+      replyInput.type = "text";
 
       replyInput.placeholder = placeholders[method] ||
         "返信先の種類を選択してください";
 
       if (method === "Discord") {
-        replyInput.type = "text";
-        replyHelp.textContent = "Discordの「ユーザー名」をご記入ください。※表示名ではありませんので注意してください。";
+        replyHelp.textContent =
+          "Discordの「ユーザー名」をご記入ください。※表示名ではありませんので注意してください。\n" +
+          "※一時的に「kawaiiOTP」よりフレンド申請をする可能性があります。対応後に解除される可能性があることを予めご了承ください。";
+
       } else if (method === "X") {
-        replyInput.type = "text";
-        replyHelp.textContent = "Xのユーザー名またはプロフィールURLをご記入ください。";
+        replyHelp.textContent =
+          "Xのユーザー名またはプロフィールURLをご記入ください。\n" +
+          "※一時的に「kawaiiOTP」よりフォローなどの対応をする可能性があります。対応後に解除される可能性があることを予めご了承ください。";
+
       } else {
-        replyInput.type = "text";
-        replyHelp.textContent = "返信が必要な場合は、連絡先やアカウント名をご記入ください。";
+        replyHelp.textContent =
+          "返信が必要な場合は、連絡先やアカウント名をご記入ください。";
       }
     }
 
@@ -482,7 +536,11 @@
 
       submitButton.disabled = true;
       submitButton.textContent = "SENDING...";
-      showStatus("送信しています。しばらくお待ちください。", "loading");
+
+      showStatus(
+        "送信しています。しばらくお待ちください。",
+        "loading"
+      );
 
       const formData = new FormData(form);
 
@@ -516,7 +574,6 @@
 
         form.reset();
         updateRequiredFields();
-        updateReplyPlaceholder();
 
         showStatus(
           "お問い合わせを送信しました。ありがとうございます！",
@@ -536,7 +593,6 @@
     });
 
     updateRequiredFields();
-    updateReplyPlaceholder();
   </script>
 
 </body>
