@@ -1,1 +1,221 @@
 
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="kaworia — kawaiiOTP × memoria">
+
+  <title>kawaiiOTP</title>
+
+  <!-- Google Fonts：Material Symbols Rounded -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- 上部固定ヘッダー -->
+  <header class="topbar">
+    <a class="topbar-brand" href="#top" aria-label="kaworia トップ">
+      kawaiiOTP
+    </a>
+
+    <nav class="top-nav" aria-label="メインナビゲーション">
+      <a href="#top">
+        <span class="material-symbols-rounded" aria-hidden="true">home</span>
+        <span>HOME</span>
+      </a>
+
+      <a href="contact/">
+        <span class="material-symbols-rounded" aria-hidden="true">mail</span>
+        <span>CONTACT</span>
+      </a>
+    </nav>
+  </header>
+
+
+  <main class="layout" id="top">
+
+    <!-- 左側：ロゴ -->
+    <aside class="side-left" aria-label="サイトロゴ">
+
+      <a class="logo-link" href="#top">
+        <img
+          src="assets/images/logo.png"
+          alt="kaworia ロゴ"
+          class="site-logo"
+        >
+      </a>
+
+      <p class="side-copy">
+        kawaiiOTPが作成・管理する、<br>
+        EternalReturnのまとめコンテンツ。
+      </p>
+
+      <span class="side-small">
+        A LITTLE PLACE<br>
+        FOR MY FAVORITES.
+      </span>
+
+    </aside>
+
+
+    <!-- 中央：スクロールコンテンツ -->
+    <div class="content-frame" id="content-scroll">
+
+      <!-- HERO -->
+      <section class="hero section">
+
+        <p class="eyebrow">WELCOME TO KAWAIIOTP</p>
+
+        <h1>
+          好きなものを、<br>
+          <span>好きなかたちに。</span>
+        </h1>
+
+        <p class="hero-lead">
+          ゲームや創作、好きなものを集めて、<br>
+          自分らしいかたちで残していく場所。
+        </p>
+
+        <a class="text-link" href="#about">
+          EXPLORE <span aria-hidden="true">↓</span>
+        </a>
+
+        <span class="hero-decoration decor-one" aria-hidden="true">✦</span>
+        <span class="hero-decoration decor-two" aria-hidden="true">✧</span>
+
+      </section>
+
+
+      <!-- ABOUT -->
+      <section class="section about" id="about">
+
+        <div class="section-heading">
+          <span class="section-number">01</span>
+
+          <div>
+            <p class="eyebrow">ABOUT</p>
+            <h2>ここについて</h2>
+          </div>
+        </div>
+
+        <p class="section-text">
+          kawaiiOTPは、好きなものや作ったものを、
+          好きなかたちでまとめていく小さなポータルサイトです。
+        </p>
+
+        <p class="section-text muted">
+          ゲームのデータや記録、ちょっとした制作物などを、
+          少しずつ紹介していきます。
+        </p>
+
+      </section>
+
+
+      <!-- PROJECTS -->
+      <section class="section projects" id="projects">
+
+        <div class="section-heading">
+          <span class="section-number">02</span>
+
+          <div>
+            <p class="eyebrow">PROJECTS</p>
+            <h2>つくっているもの</h2>
+          </div>
+        </div>
+
+        <a
+          class="project-card project-blue"
+          href="https://game-memo.hatenablog.jp/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="project-label">GAME DATABASE / GUIDE</span>
+          <span class="project-title">げーむめも</span>
+          <span class="project-description">
+            ゲームのデータ・イベント・攻略メモ。
+          </span>
+          <span class="project-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <div class="project-card project-pink">
+          <span class="project-label">COMING SOON</span>
+          <span class="project-title">ANOTHER PROJECT</span>
+          <span class="project-description">
+            新しい企画を準備中。
+          </span>
+          <span class="project-arrow" aria-hidden="true">✧</span>
+        </div>
+
+      </section>
+
+
+      <!-- CONTACT -->
+      <section class="section contact" id="contact">
+
+        <div class="section-heading">
+          <span class="section-number">03</span>
+
+          <div>
+            <p class="eyebrow">CONTACT</p>
+            <h2>お問い合わせ</h2>
+          </div>
+        </div>
+
+        <p class="section-text">
+          情報提供や不具合の報告などはこちらから。
+        </p>
+
+        <a class="contact-link" href="contact/">
+          <span>お問い合わせページへ</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+      </section>
+
+
+      <!-- 中央コンテンツ内フッター -->
+      <footer class="content-footer">
+        <span>THANK YOU FOR VISITING!</span>
+        <span>© kawaiiOTP</span>
+      </footer>
+
+    </div>
+
+
+    <!-- 右側：固定目次 -->
+    <aside class="side-right">
+
+      <p class="toc-title">CONTENTS</p>
+
+      <nav class="toc" aria-label="ページ内目次">
+        <a href="#about"><span>01</span> ABOUT</a>
+        <a href="#projects"><span>02</span> PROJECTS</a>
+        <a href="#contact"><span>03</span> CONTACT</a>
+      </nav>
+
+      <span class="side-small right-note">
+        SCROLL TO EXPLORE
+      </span>
+
+    </aside>
+
+  </main>
+
+
+  <!-- 下部固定フッター帯 -->
+  <footer class="bottombar">
+    <span>kawaiiOTP</span>
+    <span class="bottom-message">A LITTLE PLACE FOR FAVORITES</span>
+    <span>© 2026</span>
+  </footer>
+
+</body>
+</html>
+
