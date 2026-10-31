@@ -10,7 +10,7 @@
   --line: #eeeaf2;
 
   --topbar-h: 66px;
-  --bottombar-h: 54px;
+  --bottombar-h: 76px;
 
   --side-width: minmax(170px, 1fr);
   --content-width: minmax(420px, 680px);
@@ -117,22 +117,28 @@ a {
 
 .bottombar {
   bottom: 0;
-  height: var(--bottombar-h);
+  min-height: var(--bottombar-h);
 
   justify-content: center;
   text-align: center;
 
-  padding: 0 20px;
+  padding: 8px 20px;
 
   border-top: 1px solid #f0edf3;
 }
 
 .bottombar small {
+  display: block;
+
   color: #9290a3;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: .02em;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+.bottombar strong {
+  font-weight: 600;
 }
 
 
@@ -238,10 +244,6 @@ a {
 .toc a span {
   color: #b6a7c7;
   margin-right: 8px;
-}
-
-.right-note {
-  margin-top: auto;
 }
 
 
@@ -526,16 +528,18 @@ a {
 ========================= */
 
 .content-footer {
-  display: flex;
-  justify-content: space-between;
-
-  padding: 22px clamp(25px, 6vw, 66px);
+  padding: 35px 0 25px;
+  text-align: center;
 
   background: #faf9fc;
-  color: #aaa4b3;
+}
 
-  font-size: 8px;
-  letter-spacing: .13em;
+.footer-sparkle {
+  display: inline-block;
+
+  color: #b9a9df;
+  font-size: 20px;
+  letter-spacing: 5px;
 }
 
 
@@ -546,7 +550,7 @@ a {
 @media (max-width: 850px) {
 
   :root {
-    --bottombar-h: 58px;
+    --bottombar-h: 76px;
   }
 
   body {
@@ -559,13 +563,13 @@ a {
   }
 
   .bottombar {
-    height: var(--bottombar-h);
-    padding: 5px 12px;
+    min-height: var(--bottombar-h);
+    padding: 7px 12px;
   }
 
   .bottombar small {
     font-size: 8px;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .layout {
@@ -605,10 +609,6 @@ a {
 
   .toc a {
     font-size: 9px;
-  }
-
-  .right-note {
-    display: none;
   }
 
   .content-frame {
@@ -652,12 +652,8 @@ a {
     min-height: 340px;
   }
 
-  .hero h1 {
-    font-size: 29px;
-  }
-
   .content-footer {
-    padding: 18px 23px;
+    padding: 30px 0 24px;
   }
 
 }
