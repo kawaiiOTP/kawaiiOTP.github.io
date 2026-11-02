@@ -6,10 +6,24 @@
   const header = document.querySelector(".topbar");
   if (!header) return;
 
-  // メニューのデザイン
+  const nav = header.querySelector(".top-nav");
+
+  // メニューのデザイン・ヘッダー配置
   const style = document.createElement("style");
   style.id = "kaworia-menu-style";
   style.textContent = `
+    /* ヘッダー内のナビゲーションを右寄せ */
+    .topbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar .top-nav {
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* メニューボタン */
     .kaworia-menu-button {
       display: flex;
       align-items: center;
@@ -38,6 +52,7 @@
       font-size: 24px;
     }
 
+    /* ドロップダウンメニュー */
     .kaworia-menu-dropdown {
       position: fixed;
       z-index: 9999;
@@ -69,6 +84,7 @@
       display: none;
     }
 
+    /* トップリンク */
     .kaworia-menu-brand {
       display: block;
       padding: 12px 13px;
@@ -79,12 +95,14 @@
       text-decoration: none;
     }
 
+    /* 区切り線 */
     .kaworia-menu-divider {
       height: 1px;
       margin: 7px 5px;
       background: #eeeaf2;
     }
 
+    /* 通常リンク */
     .kaworia-menu-link,
     .kaworia-menu-heading,
     .kaworia-menu-sub-link {
@@ -103,17 +121,20 @@
       color: #9477b5;
     }
 
+    /* 調整履歴の見出し */
     .kaworia-menu-heading {
       padding-bottom: 5px;
       font-weight: 600;
     }
 
+    /* 調整履歴の子項目 */
     .kaworia-menu-sub-link {
       padding: 8px 13px 8px 25px;
       color: #898095;
       font-size: 12px;
     }
 
+    /* シーズンガイドの補足 */
     .kaworia-menu-note {
       display: block;
       padding: 0 13px 9px;
@@ -121,14 +142,20 @@
       font-size: 11px;
     }
 
+    /* スマートフォン */
     @media (max-width: 850px) {
       .kaworia-menu-button {
         width: 38px;
         height: 38px;
         margin-left: 14px;
       }
+
+      .kaworia-menu-dropdown {
+        max-height: calc(100vh - 85px);
+      }
     }
 
+    /* 動きを減らす設定 */
     @media (prefers-reduced-motion: reduce) {
       .kaworia-menu-dropdown,
       .kaworia-menu-button {
@@ -136,6 +163,7 @@
       }
     }
   `;
+
   document.head.appendChild(style);
 
   // メニューボタン
@@ -146,12 +174,12 @@
   button.setAttribute("aria-label", "メニューを開く");
   button.setAttribute("aria-expanded", "false");
   button.setAttribute("aria-controls", "kaworia-site-menu");
+
   button.innerHTML = `
     <span class="material-symbols-rounded" aria-hidden="true">menu</span>
   `;
 
-  // 既存ナビゲーションの後ろに追加
-  const nav = header.querySelector(".top-nav");
+  // HOME・CONTACTの右側に追加
   if (nav) {
     nav.insertAdjacentElement("afterend", button);
   } else {
@@ -165,20 +193,26 @@
   menu.setAttribute("aria-label", "サイトメニュー");
   menu.hidden = true;
 
-  // メニュー項目を作成
+  // 区切り線を追加
   const addDivider = () => {
     const divider = document.createElement("div");
     divider.className = "kaworia-menu-divider";
     menu.appendChild(divider);
   };
 
-  const addLink = (label, href, className = "kaworia-menu-link") => {
+  // リンクを追加
+  const addLink = (
+    label,
+    href,
+    className = "kaworia-menu-link"
+  ) => {
     const link = document.createElement("a");
+
     link.className = className;
     link.href = href;
     link.textContent = label;
 
-    // リンク先が未設定の項目は仮表示にする
+    // 未設定のリンクは移動させない
     if (href === "#") {
       link.addEventListener("click", (event) => {
         event.preventDefault();
@@ -187,6 +221,10 @@
 
     menu.appendChild(link);
   };
+
+  // =========================
+  // メニュー項目
+  // =========================
 
   // トップへ戻る
   addLink("kaworia", "/", "kaworia-menu-brand");
@@ -201,7 +239,7 @@
 
   const seasonNote = document.createElement("span");
   seasonNote.className = "kaworia-menu-note";
-  seasonNote.textContent = "あと何日？";
+  seasonNote.textContent = "のこり何日？スケジュールは？";
   menu.appendChild(seasonNote);
 
   addDivider();
@@ -215,15 +253,29 @@
   addLink("実装日ランキング", "https://kaworia.com/Skins/ranking/");
   addDivider();
 
-  // 調整履歴
+  // 調整履歴（見出しのみ・リンクなし）
   const historyHeading = document.createElement("span");
   historyHeading.className = "kaworia-menu-heading";
   historyHeading.textContent = "調整履歴";
   menu.appendChild(historyHeading);
 
-  addLink("特性・戦術スキル・武器スキル", "#", "kaworia-menu-sub-link");
-  addLink("実験体", "#", "kaworia-menu-sub-link");
-  addLink("武器・防具", "#", "kaworia-menu-sub-link");
+  addLink(
+    "特性・戦術スキル・武器スキル",
+    "#",
+    "kaworia-menu-sub-link"
+  );
+
+  addLink(
+    "実験体",
+    "#",
+    "kaworia-menu-sub-link"
+  );
+
+  addLink(
+    "武器・防具",
+    "#",
+    "kaworia-menu-sub-link"
+  );
 
   addDivider();
 
@@ -238,17 +290,20 @@
   // メニューの位置をボタンに合わせる
   const positionMenu = () => {
     const rect = button.getBoundingClientRect();
-    const right = Math.max(12, window.innerWidth - rect.right);
+    const right = Math.max(
+      12,
+      window.innerWidth - rect.right
+    );
 
     menu.style.top = `${rect.bottom + 10}px`;
     menu.style.right = `${right}px`;
   };
 
+  // メニューを開く
   const openMenu = () => {
     positionMenu();
     menu.hidden = false;
 
-    // hidden解除後にアニメーションを開始
     requestAnimationFrame(() => {
       menu.classList.add("is-open");
     });
@@ -258,8 +313,10 @@
     icon.textContent = "close";
   };
 
+  // メニューを閉じる
   const closeMenu = () => {
     menu.classList.remove("is-open");
+
     button.setAttribute("aria-expanded", "false");
     button.setAttribute("aria-label", "メニューを開く");
     icon.textContent = "menu";
@@ -301,13 +358,18 @@
 
   // メニュー内のリンクを押したら閉じる
   menu.addEventListener("click", (event) => {
-    if (event.target.closest("a") && event.target.getAttribute("href") !== "#") {
+    const link = event.target.closest("a");
+
+    if (link && link.getAttribute("href") !== "#") {
       closeMenu();
     }
   });
 
-  // 画面サイズが変わったら位置を調整
+  // 画面サイズ変更時に位置を調整
   window.addEventListener("resize", () => {
-    if (!menu.hidden) positionMenu();
+    if (!menu.hidden) {
+      positionMenu();
+    }
   });
+
 })();
