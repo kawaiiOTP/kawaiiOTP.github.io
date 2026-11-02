@@ -226,10 +226,6 @@
   // メニュー項目
   // =========================
 
-  // トップへ戻る
-  addLink("kaworia", "/", "kaworia-menu-brand");
-  addDivider();
-
   // クーポン
   addLink("クーポン", "#");
   addDivider();
