@@ -727,3 +727,481 @@ a {
 .profile-link:hover {
   color: #b18fc9;
 }
+
+/* ========================================
+   KAWORIA DESIGN SYSTEM
+   Shared Header / Footer / Color Theme
+======================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+
+
+/* 共通カラー */
+:root {
+  --page: #f4f2f7;
+  --surface: #ffffff;
+
+  --text: #55536a;
+  --muted: #9290a3;
+
+  --accent: #a38bbd;
+  --accent-light: #f0edf7;
+
+  --border: #eeeaf2;
+
+  --radius: 14px;
+
+  --kaworia-blue: #dff1fb;
+  --kaworia-pink: #f9e5ef;
+}
+
+
+/* 全体 */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding-top: 66px;
+  padding-bottom: 92px;
+
+  background: var(--page);
+  color: var(--text);
+
+  font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+  line-height: 1.7;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 66px;
+  padding: 0 clamp(20px, 4vw, 64px);
+
+  background: rgba(255, 255, 255, .97);
+  border-bottom: 1px solid #f0edf3;
+}
+
+.topbar-brand {
+  color: #8c78a7;
+
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: .06em;
+
+  text-decoration: none;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.top-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #777187;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+
+  text-decoration: none;
+
+  transition: color .2s, transform .2s;
+}
+
+.top-nav a:hover {
+  color: #a184bd;
+  transform: translateY(-2px);
+}
+
+.top-nav a.active {
+  color: #a38bbd;
+}
+
+.material-symbols-rounded {
+  font-size: 22px;
+  line-height: 1;
+
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+
+/* ========================================
+   PAGE HEADING
+======================================== */
+
+.eyebrow {
+  color: #a18ab8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+}
+
+.page-heading h1 {
+  color: #69647e;
+  letter-spacing: .04em;
+}
+
+.description {
+  color: #9290a3;
+  line-height: 2;
+}
+
+
+/* ========================================
+   FILTER PANEL
+======================================== */
+
+.filter-panel {
+  background: #fff;
+  border: 1px solid #eeeaf2;
+  border-radius: 13px;
+  box-shadow: 0 5px 22px rgba(89, 75, 110, .035);
+}
+
+.field > span {
+  color: #69647e;
+  font-weight: 600;
+}
+
+input,
+select {
+  border: 1px solid #eae4f0;
+  border-radius: 9px;
+
+  background: #fff;
+  color: #55536a;
+
+  font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+
+  transition: border-color .2s, box-shadow .2s;
+}
+
+input::placeholder {
+  color: #b2aabb;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #b49fc8;
+  box-shadow: 0 0 0 3px rgba(163, 139, 189, .12);
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.button {
+  border-radius: 9px;
+  font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+  font-weight: 600;
+
+  transition:
+    background .2s,
+    color .2s,
+    transform .2s;
+}
+
+.button-light {
+  background: #f0edf7;
+  color: #817092;
+}
+
+.button-light:hover {
+  background: #e9e0f1;
+  color: #8c78a7;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+
+/* ========================================
+   RESULT BAR
+======================================== */
+
+.result-bar {
+  color: #9290a3;
+  align-items: center;
+}
+
+.load-all-button {
+  margin-top: 0;
+}
+
+
+/* ========================================
+   SKIN CARDS
+   レイアウト・画像比率は変更しない
+======================================== */
+
+.skin-card {
+  background: #fff;
+  border-color: #eeeaf2;
+  border-radius: 13px;
+
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    border-color .2s;
+}
+
+.skin-card:hover {
+  border-color: #e2d6ed;
+  box-shadow: 0 8px 24px rgba(89, 75, 110, .08);
+}
+
+.skin-image {
+  background:
+    linear-gradient(
+      145deg,
+      #e7f4fc 0%,
+      #f1edfa 58%,
+      #fcecf3 100%
+    );
+
+  color: #a39ab0;
+}
+
+.skin-info {
+  color: #55536a;
+}
+
+.skin-name {
+  color: #625773;
+  font-weight: 600;
+}
+
+.skin-character {
+  color: #9290a3;
+}
+
+.tags {
+  gap: 5px;
+}
+
+.tag {
+  background: #f0edf7;
+  color: #817092;
+  border-radius: 6px;
+}
+
+.skin-date {
+  color: #9290a3;
+}
+
+
+/* ========================================
+   RANKING
+======================================== */
+
+.ranking-item {
+  background: #fff;
+  border-color: #eeeaf2;
+  border-radius: 13px;
+}
+
+.rank-number {
+  background: #f0edf7;
+  color: #a38bbd;
+}
+
+.rank-character {
+  color: #625773;
+}
+
+.rank-detail,
+.rank-days span {
+  color: #9290a3;
+}
+
+.rank-days strong {
+  color: #8c78a7;
+}
+
+
+/* ========================================
+   EMPTY MESSAGE
+======================================== */
+
+.empty-message {
+  color: #9290a3;
+}
+
+
+/* ========================================
+   IMAGE DIALOG
+======================================== */
+
+.image-dialog {
+  background: #fff;
+  color: #55536a;
+  border: 1px solid #eeeaf2;
+  border-radius: 13px;
+
+  box-shadow: 0 15px 50px rgba(50, 40, 70, .15);
+}
+
+.image-dialog::backdrop {
+  background: rgba(35, 30, 45, .72);
+}
+
+.dialog-close {
+  color: #8c78a7;
+  transition: color .2s;
+}
+
+.dialog-close:hover {
+  color: #b18fc9;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.bottombar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 92px;
+  padding: 16px 20px;
+
+  background: rgba(255, 255, 255, .97);
+  border-top: 1px solid #f0edf3;
+
+  text-align: center;
+}
+
+.bottombar small {
+  display: block;
+
+  color: #9290a3;
+  font-size: 10px;
+  font-weight: 500;
+
+  letter-spacing: .02em;
+  line-height: 1.8;
+}
+
+.bottombar strong {
+  font-weight: 600;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 800px) {
+  body {
+    padding-top: 60px;
+    padding-bottom: 92px;
+  }
+
+  .topbar {
+    height: 60px;
+    padding: 0 18px;
+  }
+
+  .bottombar {
+    min-height: 92px;
+    padding: 12px;
+  }
+
+  .bottombar small {
+    font-size: 8px;
+    line-height: 1.7;
+  }
+}
+
+
+/* ========================================
+   SMARTPHONE
+======================================== */
+
+@media (max-width: 520px) {
+
+  .topbar {
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .topbar-brand {
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .top-nav {
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .top-nav a {
+    gap: 4px;
+    font-size: 9px;
+    letter-spacing: .03em;
+  }
+
+  .top-nav .material-symbols-rounded {
+    font-size: 18px;
+  }
+
+  .container {
+    padding-top: 24px;
+  }
+
+  .page-heading h1 {
+    font-size: 27px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .filter-panel {
+    padding: 15px;
+  }
+
+  .bottombar {
+    min-height: 92px;
+    padding: 12px 10px;
+  }
+
+  .bottombar small {
+    font-size: 8px;
+  }
+}
