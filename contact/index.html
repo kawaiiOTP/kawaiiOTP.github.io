@@ -261,26 +261,39 @@
 
 <body>
 
+  <!-- =========================
+       上部固定ヘッダー
+  ========================== -->
+
   <header class="topbar">
-    <a class="topbar-brand" href="../">kaworia</a>
+
+    <a class="topbar-brand" href="../">
+      kaworia
+    </a>
 
     <nav class="top-nav" aria-label="メインナビゲーション">
+
+      <!-- CONTACTページではHOMEのみ表示 -->
       <a href="../">
         <span class="material-symbols-rounded" aria-hidden="true">home</span>
         <span>HOME</span>
       </a>
 
-      <a href="./" aria-current="page">
-        <span class="material-symbols-rounded" aria-hidden="true">mail</span>
-        <span>CONTACT</span>
-      </a>
     </nav>
+
   </header>
+
+
+  <!-- =========================
+       メインレイアウト
+  ========================== -->
 
   <main class="layout">
 
     <!-- 左側：ロゴ -->
+
     <aside class="side-left">
+
       <a class="logo-link" href="../">
         <img
           src="../assets/images/logo.png"
@@ -288,26 +301,44 @@
           class="site-logo"
         >
       </a>
+
     </aside>
 
-    <!-- 中央：お問い合わせ -->
+
+    <!-- =========================
+         中央：お問い合わせ
+    ========================== -->
+
     <div class="content-frame">
 
+      <!-- HERO -->
+
       <section class="hero section">
+
         <p class="eyebrow">GET IN TOUCH</p>
+
         <h1>CONTACT</h1>
-        <p class="hero-lead">kaworia / kawaiiOTP へのお問い合わせフォームです。</p>
+
+        <p class="hero-lead">
+          kaworia / kawaiiOTP へのお問い合わせフォームです。
+        </p>
+
       </section>
+
+
+      <!-- CONTACT FORM -->
 
       <section class="section contact">
 
         <div class="section-heading">
+
           <span class="section-number">✉</span>
 
           <div>
             <p class="eyebrow">MESSAGE</p>
             <h2>お問い合わせフォーム</h2>
           </div>
+
         </div>
 
         <p class="form-intro">
@@ -319,7 +350,9 @@
         <form id="contact-form" class="contact-form">
 
           <!-- お問い合わせ種類 -->
+
           <div class="form-group">
+
             <label class="form-label" for="category">
               お問い合わせ種類
               <span class="form-required">必須</span>
@@ -333,10 +366,14 @@
               <option value="その他">その他</option>
               <option value="その他：要返信">その他：要返信</option>
             </select>
+
           </div>
 
+
           <!-- お名前 -->
+
           <div class="form-group">
+
             <label class="form-label" for="name">
               お名前
               <span id="name-requirement" class="form-optional">任意</span>
@@ -350,10 +387,14 @@
               autocomplete="name"
               placeholder="お名前（任意）"
             >
+
           </div>
 
+
           <!-- 返信先の種類 -->
+
           <div class="form-group">
+
             <label class="form-label" for="reply-method">
               返信先の種類
               <span id="method-requirement" class="form-optional">任意</span>
@@ -364,10 +405,14 @@
               <option value="Discord">Discord</option>
               <option value="X">X</option>
             </select>
+
           </div>
 
+
           <!-- 返信先 -->
+
           <div class="form-group">
+
             <label class="form-label" for="reply">
               返信先
               <span id="reply-requirement" class="form-optional">任意</span>
@@ -385,10 +430,14 @@
             <p id="reply-help" class="form-help">
               返信が必要な場合は、連絡先やアカウント名をご記入ください。
             </p>
+
           </div>
 
+
           <!-- お問い合わせ内容 -->
+
           <div class="form-group">
+
             <label class="form-label" for="message">
               お問い合わせ内容
               <span class="form-required">必須</span>
@@ -401,11 +450,16 @@
               required
               placeholder="お問い合わせ内容をご記入ください。"
             ></textarea>
+
           </div>
 
-          <!-- スパム対策用：入力しない項目 -->
+
+          <!-- スパム対策用 -->
+
           <div class="honeypot" aria-hidden="true">
+
             <label for="website">この項目は入力しないでください</label>
+
             <input
               type="text"
               id="website"
@@ -413,7 +467,9 @@
               tabindex="-1"
               autocomplete="off"
             >
+
           </div>
+
 
           <button type="submit" id="submit-button" class="form-submit">
             SEND MESSAGE
@@ -428,6 +484,9 @@
 
         </form>
 
+
+        <!-- トップページへ戻る -->
+
         <a class="form-back" href="../">
           <span>トップページへ戻る</span>
           <span aria-hidden="true">↗</span>
@@ -435,28 +494,45 @@
 
       </section>
 
-      <!-- HOMEと同じ中央フッター -->
+
+      <!-- 中央コンテンツ内フッター -->
+
       <footer class="content-footer">
         <span class="footer-sparkle">✧　✦　✧</span>
       </footer>
 
     </div>
 
-    <!-- 右側：CONTACTSのみ -->
+
+    <!-- =========================
+         右側：CONTACTS
+    ========================== -->
+
     <aside class="side-right">
       <p class="toc-title">CONTACTS</p>
     </aside>
 
   </main>
 
-  <!-- HOMEと同じ固定フッター -->
+
+  <!-- =========================
+       下部固定フッター
+  ========================== -->
+
   <footer class="bottombar">
+
     <small>
       kawaiiOTPが制作・管理しているEternal Returnの有志サイトです。<br>
       引用内容/スクリーンショット/画像の権利につきましては、権利者様へ帰属します。<br>
       ©2020 NIMBLE NEURON CORPORATION. ALL RIGHTS RESERVED.
     </small>
+
   </footer>
+
+
+  <!-- =========================
+       お問い合わせフォーム処理
+  ========================== -->
 
   <script>
     const WORKER_URL = "https://contacts.kaworia.workers.dev";
@@ -642,6 +718,13 @@
 
     updateRequiredFields();
   </script>
+
+
+  <!-- =========================
+       共通メニュー
+  ========================== -->
+
+  <script src="/js/menu.js" defer></script>
 
 </body>
 </html>
