@@ -1205,3 +1205,24 @@ select:focus {
     font-size: 8px;
   }
 }
+
+/* レアリティカラーは従来どおり維持 */
+.tag-rarity-high {
+  background-color: #E3F3E5;
+  color: #397849;
+}
+
+.tag-rarity-rare {
+  background-color: #E2F0FF;
+  color: #2865A8;
+}
+
+.tag-rarity-hero {
+  background-color: #F0E5FF;
+  color: #7946A8;
+}
+
+.tag-category {
+  background-color: #EEEEEE;
+  color: #222222;
+}
