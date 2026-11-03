@@ -880,3 +880,11 @@ a {
     font-size: 29px;
   }
 }
+/* 残り時間表示 */
+.season-card__hours {
+  color: #a38bbd;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 2px;
+}
