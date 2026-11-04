@@ -42,6 +42,15 @@ body.skins-page {
   overflow-y: auto;
 }
 
+/* ========================================
+   RANKING：ランキングページのスクロール修正
+======================================== */
+
+body.ranking-page {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 /* リンク */
 
 a {
