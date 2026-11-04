@@ -21,7 +21,7 @@
   let isCollapsed = false;
 
   // ========================================
-  // スタイル設定
+  // CSS
   // ========================================
 
   if (!document.getElementById("season-card-collapse-style")) {
@@ -29,56 +29,30 @@
     style.id = "season-card-collapse-style";
 
     style.textContent = `
-      .season-card__body {
+      #season-card-root .season-card {
+        position: relative;
+      }
+
+      #season-card-root .season-card__body {
         display: grid;
         grid-template-rows: 1fr;
         opacity: 1;
         transition:
           grid-template-rows .3s ease,
-          opacity .25s ease;
+          opacity .3s ease;
       }
 
-      .season-card__body-inner {
+      #season-card-root .season-card__body-inner {
         min-height: 0;
         overflow: hidden;
       }
 
-      .season-card.is-collapsed .season-card__body {
+      #season-card-root .season-card.is-collapsed .season-card__body {
         grid-template-rows: 0fr;
         opacity: 0;
       }
 
-      .season-card__collapse-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        width: 100%;
-        margin-top: 12px;
-        padding: 9px 12px;
-        border: none;
-        border-top: 1px solid rgba(128, 128, 128, .2);
-        background: transparent;
-        color: inherit;
-        font-size: 12px;
-        cursor: pointer;
-        transition: background .2s ease;
-      }
-
-      .season-card__collapse-button:hover {
-        background: rgba(128, 128, 128, .08);
-      }
-
-      .season-card__collapse-icon {
-        display: inline-block;
-        transition: transform .3s ease;
-      }
-
-      .season-card.is-collapsed .season-card__collapse-icon {
-        transform: rotate(180deg);
-      }
-
-      .season-card__compact {
+      #season-card-root .season-card__compact {
         display: none;
         align-items: center;
         justify-content: center;
@@ -87,17 +61,53 @@
         font-size: 13px;
       }
 
-      .season-card.is-collapsed .season-card__compact {
+      #season-card-root .season-card.is-collapsed .season-card__compact {
         display: flex;
       }
 
-      .season-card__compact strong {
+      #season-card-root .season-card__compact strong {
         font-size: 18px;
       }
 
+      #season-card-root .season-card__collapse-button {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        width: 100%;
+        min-height: 40px;
+        margin-top: 12px;
+        padding: 10px;
+        border: none;
+        border-top: 1px solid rgba(128, 128, 128, .2);
+        background: transparent;
+        color: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        pointer-events: auto;
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      #season-card-root .season-card__collapse-button:hover {
+        background: rgba(128, 128, 128, .08);
+      }
+
+      #season-card-root .season-card__collapse-icon {
+        display: inline-block;
+        transition: transform .3s ease;
+      }
+
+      #season-card-root .season-card.is-collapsed .season-card__collapse-icon {
+        transform: rotate(180deg);
+      }
+
       @media (prefers-reduced-motion: reduce) {
-        .season-card__body,
-        .season-card__collapse-icon {
+        #season-card-root .season-card__body,
+        #season-card-root .season-card__collapse-icon {
           transition: none;
         }
       }
@@ -107,7 +117,7 @@
   }
 
   // ========================================
-  // カード表示
+  // カード更新
   // ========================================
 
   function updateCard() {
@@ -194,33 +204,59 @@
           class="season-card__collapse-button"
           aria-expanded="${!isCollapsed}"
         >
-          <span class="season-card__collapse-icon">⌄</span>
+          <span class="season-card__collapse-icon">◆</span>
           <span>${isCollapsed ? "展開する" : "折りたたむ"}</span>
         </button>
 
       </section>
     `;
 
-    // ========================================
-    // 折りたたみ操作
-    // ========================================
+  }
 
-    const card = root.querySelector(".season-card");
-    const button = root.querySelector(".season-card__collapse-button");
+  // ========================================
+  // クリックイベント（イベント委譲）
+  // ========================================
 
-    button.addEventListener("click", () => {
+  if (root.dataset.collapseListener !== "true") {
+
+    root.dataset.collapseListener = "true";
+
+    root.addEventListener("click", (event) => {
+
+      const button = event.target.closest(
+        ".season-card__collapse-button"
+      );
+
+      if (!button || !root.contains(button)) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
       isCollapsed = !isCollapsed;
+
+      const card = root.querySelector(".season-card");
+
+      if (!card) return;
 
       card.classList.toggle("is-collapsed", isCollapsed);
 
-      button.setAttribute("aria-expanded", String(!isCollapsed));
+      button.setAttribute(
+        "aria-expanded",
+        String(!isCollapsed)
+      );
 
       button.innerHTML = `
         <span class="season-card__collapse-icon">⌄</span>
         <span>${isCollapsed ? "展開する" : "折りたたむ"}</span>
       `;
+
     });
+
   }
+
+  // ========================================
+  // 初期化
+  // ========================================
 
   updateCard();
 
