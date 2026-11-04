@@ -18,10 +18,6 @@
   const startDate = new Date(season.start);
   const endDate = new Date(season.end);
 
-  // ========================================
-  // 折りたたみ設定
-  // ========================================
-
   let isCollapsed = false;
 
   // ========================================
@@ -33,28 +29,6 @@
     style.id = "season-card-collapse-style";
 
     style.textContent = `
-      .season-card__toggle {
-        border: none;
-        background: transparent;
-        color: inherit;
-        cursor: pointer;
-        font-size: 18px;
-        line-height: 1;
-        padding: 6px 10px;
-        border-radius: 8px;
-        transition: background .2s ease, transform .2s ease;
-      }
-
-      .season-card__toggle:hover {
-        background: rgba(128, 128, 128, .12);
-      }
-
-      .season-card__heading {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
       .season-card__body {
         display: grid;
         grid-template-rows: 1fr;
@@ -74,12 +48,43 @@
         opacity: 0;
       }
 
+      .season-card__collapse-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        margin-top: 12px;
+        padding: 9px 12px;
+        border: none;
+        border-top: 1px solid rgba(128, 128, 128, .2);
+        background: transparent;
+        color: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background .2s ease;
+      }
+
+      .season-card__collapse-button:hover {
+        background: rgba(128, 128, 128, .08);
+      }
+
+      .season-card__collapse-icon {
+        display: inline-block;
+        transition: transform .3s ease;
+      }
+
+      .season-card.is-collapsed .season-card__collapse-icon {
+        transform: rotate(180deg);
+      }
+
       .season-card__compact {
         display: none;
         align-items: center;
+        justify-content: center;
         gap: 12px;
+        padding: 12px 8px 4px;
         font-size: 13px;
-        padding: 8px 0 2px;
       }
 
       .season-card.is-collapsed .season-card__compact {
@@ -92,7 +97,7 @@
 
       @media (prefers-reduced-motion: reduce) {
         .season-card__body,
-        .season-card__toggle {
+        .season-card__collapse-icon {
           transition: none;
         }
       }
@@ -137,19 +142,7 @@
 
         <div class="season-card__heading">
           <span>✦ SEASON ${season.number}</span>
-
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span class="season-card__label">RANKED</span>
-
-            <button
-              type="button"
-              class="season-card__toggle"
-              aria-label="${isCollapsed ? "展開する" : "折りたたむ"}"
-              aria-expanded="${!isCollapsed}"
-            >
-              ${isCollapsed ? "+" : "−"}
-            </button>
-          </div>
+          <span class="season-card__label">RANKED</span>
         </div>
 
         <div class="season-card__compact">
@@ -196,15 +189,36 @@
           </div>
         </div>
 
+        <button
+          type="button"
+          class="season-card__collapse-button"
+          aria-expanded="${!isCollapsed}"
+        >
+          <span class="season-card__collapse-icon">⌄</span>
+          <span>${isCollapsed ? "展開する" : "折りたたむ"}</span>
+        </button>
+
       </section>
     `;
 
-    // 折りたたみボタン
-    const toggle = root.querySelector(".season-card__toggle");
+    // ========================================
+    // 折りたたみ操作
+    // ========================================
 
-    toggle.addEventListener("click", () => {
+    const card = root.querySelector(".season-card");
+    const button = root.querySelector(".season-card__collapse-button");
+
+    button.addEventListener("click", () => {
       isCollapsed = !isCollapsed;
-      updateCard();
+
+      card.classList.toggle("is-collapsed", isCollapsed);
+
+      button.setAttribute("aria-expanded", String(!isCollapsed));
+
+      button.innerHTML = `
+        <span class="season-card__collapse-icon">⌄</span>
+        <span>${isCollapsed ? "展開する" : "折りたたむ"}</span>
+      `;
     });
   }
 
