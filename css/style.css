@@ -750,11 +750,15 @@ a {
   right: 64px;
   z-index: 900;
   width: 290px;
-  pointer-events: none;
+
+  /* クリック・タップ操作を有効化 */
+  pointer-events: auto;
+
   font-family: "DM Sans", "Noto Sans JP", sans-serif;
 }
 
 .season-card {
+  position: relative;
   padding: 14px 16px 12px;
   color: #55536a;
   background: rgba(255, 255, 255, 0.96);
@@ -872,6 +876,100 @@ a {
 }
 
 
+/* ========================================
+   SEASON CARD：折りたたみ機能
+======================================== */
+
+#season-card-root .season-card__body {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+
+  transition:
+    grid-template-rows .3s ease,
+    opacity .3s ease;
+}
+
+#season-card-root .season-card__body-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+#season-card-root .season-card.is-collapsed .season-card__body {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+#season-card-root .season-card__compact {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 8px 4px;
+  font-size: 13px;
+}
+
+#season-card-root .season-card.is-collapsed .season-card__compact {
+  display: flex;
+}
+
+#season-card-root .season-card__compact strong {
+  font-size: 18px;
+}
+
+#season-card-root .season-card__collapse-button {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  width: 100%;
+  min-height: 40px;
+
+  margin-top: 12px;
+  padding: 10px;
+
+  border: none;
+  border-top: 1px solid rgba(128, 128, 128, .2);
+
+  background: transparent;
+  color: inherit;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: background .2s ease;
+}
+
+#season-card-root .season-card__collapse-button:hover {
+  background: rgba(128, 128, 128, .08);
+}
+
+#season-card-root .season-card__collapse-button:focus-visible {
+  outline: 2px solid #a38bbd;
+  outline-offset: -3px;
+  border-radius: 5px;
+}
+
+#season-card-root .season-card__collapse-icon {
+  display: inline-block;
+  transition: transform .3s ease;
+}
+
+#season-card-root .season-card.is-collapsed .season-card__collapse-icon {
+  transform: rotate(180deg);
+}
+
+
 /* =========================
    シーズンカード：スマートフォン
 ========================= */
@@ -897,6 +995,7 @@ a {
   .season-card__count strong {
     font-size: 29px;
   }
+
 }
 
 
@@ -910,4 +1009,18 @@ a {
   font-weight: 600;
   line-height: 1.2;
   margin-top: 2px;
+}
+
+
+/* =========================
+   アニメーション軽減設定
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  #season-card-root .season-card__body,
+  #season-card-root .season-card__collapse-icon {
+    transition: none;
+  }
+
 }
