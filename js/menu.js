@@ -227,7 +227,7 @@
   // =========================
 
   // クーポン
-  addLink("クーポン", "#");
+  addLink("クーポン/イベント", "https://kaworia.com/cood/");
   addDivider();
 
   // シーズンガイド
