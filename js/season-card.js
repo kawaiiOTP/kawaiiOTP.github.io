@@ -8,10 +8,10 @@
   // ========================================
 
   const season = {
-    number: 12,
-    start: "2026-08-13T15:00:00+09:00",
-    end: "2026-11-12T09:59:59+09:00",
-    rankText: "8800RP以上",
+    number: 13,
+    start: "2026-11-19T15:00:00+09:00",
+    end: "2027-02-17T10:59:59+09:00",
+    rankText: "--RP以上",
     image: "/assets/images/season-mascot.png"
   };
 
